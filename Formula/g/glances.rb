@@ -3,8 +3,8 @@ class Glances < Formula
 
   desc "Alternative to top/htop"
   homepage "https://nicolargo.github.io/glances/"
-  url "https://files.pythonhosted.org/packages/2d/5c/628323ef58132b4a093e7182bbb5c5c3063fbd598873f31024b58448be73/Glances-3.4.0.5.tar.gz"
-  sha256 "2aaae0222744837e1223f63bd2efffbc6a3fdae42c95b2ebd1925cf94ae2a85b"
+  url "https://files.pythonhosted.org/packages/02/0c/7fb4ae18c063d3555496964e645350e7f6daf2b24d0414527ae1dff2834e/glances-4.0.1.tar.gz"
+  sha256 "ceb407256191859c7e8da3503f24723f7d2fa2538e083be69a27583e0d046aca"
   license "LGPL-3.0-or-later"
 
   bottle do
@@ -17,7 +17,13 @@ class Glances < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:   "592fd120e04f6830f4ee0792d563c4163413770e5f84601e21885333866eb7e0"
   end
 
+  depends_on "rust" => :build # for pydantic
   depends_on "python@3.12"
+
+  resource "annotated-types" do
+    url "https://files.pythonhosted.org/packages/67/fe/8c7b275824c6d2cd17c93ee85d0ee81c090285b6d52f4876ccc47cf9c3c4/annotated_types-0.6.0.tar.gz"
+    sha256 "563339e807e53ffd9c267e99fc6d9ea23eb8443c08f112651963e24e22f84a5d"
+  end
 
   resource "defusedxml" do
     url "https://files.pythonhosted.org/packages/0f/d5/c66da9b79e5bdb124974bfe172b4daf3c984ebd9c2a06e2b8a4dc7331c72/defusedxml-0.7.1.tar.gz"
@@ -34,6 +40,21 @@ class Glances < Formula
     sha256 "6be126e3225486dff286a8fb9a06246a5253f4c7c53b475ea5f5ac934e64194c"
   end
 
+  resource "pydantic" do
+    url "https://files.pythonhosted.org/packages/1f/74/0d009e056c2bd309cdc053b932d819fcb5ad3301fc3e690c097e1de3e714/pydantic-2.7.1.tar.gz"
+    sha256 "e9dbb5eada8abe4d9ae5f46b9939aead650cd2b68f249bb3a8139dbe125803cc"
+  end
+
+  resource "pydantic-core" do
+    url "https://files.pythonhosted.org/packages/e9/23/a609c50e53959eb96393e42ae4891901f699aaad682998371348650a6651/pydantic_core-2.18.2.tar.gz"
+    sha256 "2e29d20810dfc3043ee13ac7d9e25105799817683348823f305ab3f349b9386e"
+  end
+
+  resource "typing-extensions" do
+    url "https://files.pythonhosted.org/packages/f6/f3/b827b3ab53b4e3d8513914586dcca61c355fa2ce8252dea4da56e67bf8f2/typing_extensions-4.11.0.tar.gz"
+    sha256 "83f085bd5ca59c80295fc2a82ab5dac679cbe02b9f33f7d83af68e241bea51b0"
+  end
+
   resource "ujson" do
     url "https://files.pythonhosted.org/packages/6e/54/6f2bdac7117e89a47de4511c9f01732a283457ab1bf856e1e51aa861619e/ujson-5.9.0.tar.gz"
     sha256 "89cc92e73d5501b8a7f48575eeb14ad27156ad092c2e9fc7e3cf949f07e75532"
@@ -41,6 +62,7 @@ class Glances < Formula
 
   def install
     virtualenv_install_with_resources
+
     prefix.install libexec/"share"
   end
 
