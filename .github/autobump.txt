@@ -820,6 +820,7 @@ getmail6
 gettext
 gf
 ggshield
+ghc@9.6
 ghcup
 ghex
 ghorg

@@ -1,8 +1,8 @@
 class GhcAT96 < Formula
   desc "Glorious Glasgow Haskell Compilation System"
   homepage "https://haskell.org/ghc/"
-  url "https://downloads.haskell.org/~ghc/9.6.3/ghc-9.6.3-src.tar.xz"
-  sha256 "dfcde67b4aa550a0b8a1a9bb8105835dc999fad6397cce33d72fd55d21eb77f5"
+  url "https://downloads.haskell.org/~ghc/9.6.5/ghc-9.6.5-src.tar.xz"
+  sha256 "87b389924f98c1a26c205122757338c8dab33ad1fcf670faa22622742432b93c"
   # We build bundled copies of libffi and GMP so GHC inherits the licenses
   license all_of: [
     "BSD-3-Clause",
@@ -98,6 +98,12 @@ class GhcAT96 < Formula
   patch do
     url "https://gitlab.haskell.org/ghc/ghc/-/commit/70526f5bd8886126f49833ef20604a2c6477780a.diff"
     sha256 "54cdde1ca5d1b6fe3bbad8d0eac2b8c112ca1f346c4086d1e7361fa9510f1f44"
+  end
+
+  # remove `FP_PROG_LD_BUILD_ID`, upstream PR ref, https://gitlab.haskell.org/ghc/ghc/-/merge_requests/10518
+  patch do
+    url "https://gitlab.haskell.org/ghc/ghc/-/commit/a1dc4da985db1e14c8251a024edd47d832da4fb2.diff"
+    sha256 "20196da2aa5d463e8fa5b273ea8c3e4e0f1126ef1d327ad3c31f282c89d8f035"
   end
 
   def install
