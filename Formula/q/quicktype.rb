@@ -3,8 +3,8 @@ require "language/node"
 class Quicktype < Formula
   desc "Generate types and converters from JSON, Schema, and GraphQL"
   homepage "https://github.com/quicktype/quicktype"
-  url "https://registry.npmjs.org/quicktype/-/quicktype-23.0.158.tgz"
-  sha256 "dec5cf47df3272c419a73f7f273844596b89d59172a27ae2c6d8b6ba69fe9530"
+  url "https://registry.npmjs.org/quicktype/-/quicktype-23.0.159.tgz"
+  sha256 "8a668fac86ed31e253937647f3617e2fce4f27a4e43ddbef73a6a7ac802b8031"
   license "Apache-2.0"
   head "https://github.com/quicktype/quicktype.git", branch: "master"
 
@@ -21,6 +21,9 @@ class Quicktype < Formula
   depends_on "node"
 
   def install
+    # upstream package layout bug report, https://github.com/glideapps/quicktype/issues/2593
+    mv Dir["dist/src/*"], "dist"
+
     system "npm", "install", *Language::Node.std_npm_install_args(libexec)
     bin.install_symlink Dir["#{libexec}/bin/*"]
   end
